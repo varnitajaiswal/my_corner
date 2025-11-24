@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VARNITA JAISWAL - Resume</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+/*GLOBAL STYLES (COLORS & FONTS) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000; /* Main Background Color */
+    color: #ffffff;   /* Main Text Color */
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Font used for code snippets or tech terms */
+code, pre, .tech-font {
+    font-family: 'Courier New', monospace;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* BACKGROUND ANIMATION STYLES */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle, #001122 0%, #000 100%);
+}
+
+/* Grid Pattern Overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* HEADER & PROFILE STYLES */
+header {
+    text-align: center;
+    padding: 50px 0;
+    background: linear-gradient(135deg, #000, #001122);
+    border-bottom: 2px solid #00d4ff; /* Neon blue accent */
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #ffd700; /* Gold border */
+    margin-bottom: 20px;
+    object-fit: cover;
+    object-position: center;
+    /* clip-path ensures the image stays circular */
+    clip-path: circle(50%);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #00d4ff; /* Neon blue */
+    text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 30px #00d4ff;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ff000d, 0 0 20px #00d4ff, 0 0 30px #00d4ff; }
+    to { text-shadow: 0 0 20px #00d4ff, 0 0 30px #00d4ff, 0 0 40px #00d4ff, 0 0 50px #00d4ff; }
+}
+
+.title {
+    font-size: 1.2em;
+    color: #ffd700; /* Gold */
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px #ffd700;
+    letter-spacing: 1px;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.contact a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.contact a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #00d4ff;
+    transition: width 0.3s ease;
+}
+
+.contact a:hover {
+    color: #00d4ff;
+    text-shadow: 0 0 10px #00d4ff;
+}
+
+.contact a:hover::after {
+    width: 100%;
+}
+
+/* SECTION HEADINGS & LAYOUT */
+
+.section {
+    padding: 60px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: #ffd700; /* Gold */
+    text-align: center;
+    text-shadow: 0 0 10px #ffd700;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+    animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* SKILLS SECTION */
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.skills-text-list ul {
+    list-style: none;
+}
+
+.skills-text-list li {
+    margin: 10px 0;
+    padding: 10px;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 5px;
+    border-left: 3px solid #00d4ff;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.skills-text-list li::before {
+    content: '> ';
+    color: #00d4ff;
+    margin-right: 10px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.skills-text-list li:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateX(5px);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+}
+
+/* PROJECTS & EDUCATION CARDS */
+.project-item, .education-item {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 215, 0, 0.05); /* Very faint gold background */
+    border-radius: 10px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover, .education-item:hover {
+    transform: translateY(-5px);
+    border-color: #00d4ff;
+}
+
+.project-item h3, .education-item h3 {
+    color: #00d4ff;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px #00d4ff;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.project-item p, .education-item p {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 10px;
+}
+
+/* Specific styles for Education Achievements list */
+.achievements-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: achievement-counter;
+}
+
+.achievements-list li {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(0, 212, 255, 0.1);
+    border-left: 4px solid #00d4ff;
+    border-radius: 5px;
+    position: relative;
+    padding-left: 50px;
+    transition: all 0.3s ease;
+}
+
+.achievements-list li::before {
+    content: counter(achievement-counter);
+    counter-increment: achievement-counter;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    background: #00d4ff;
+    color: #000;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 0 10px #00d4ff;
+}
+
+.achievements-list li:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateX(5px);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+/* FOOTER & BUTTONS */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #001122;
+    border-top: 2px solid #00d4ff;
+}
+
+#download-cv {
+    background: #00d4ff;
+    color: #000;
+    border: 2px solid #00d4ff;
+    padding: 12px 30px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+#download-cv:hover {
+    background: #32ea2c;
+    border-color: #32ea2c;
+    box-shadow: 0 0 30px rgba(60, 255, 0, 0.8);
+    transform: scale(1.05);
+}
+
+/* Typing cursor effect */
+#typing-summary::after {
+    content: '|';
+    animation: blink 1s infinite;
+    color: #00d4ff;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* RESPONSIVE DESIGN (MOBILE) */
+
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    .profile-pic {
+        width: 120px;
+        height: 120px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div id="particles"></div> <header>
+        <div class="container">
+            <!-- Profile image: place your personal image at `images/profile.jpg` (recommended square, e.g. 300x300 or 600x600) -->
+            <img src="download.jpeg" alt="Varnita Jaiswal" class="profile-pic">
+            
+            <h1>VARNITA JAISWAL</h1>
+            <p class="title">B.TECH CS (AI & ML) STUDENT</p>
+            
+            <div class="contact">
+                <a href="mailto:PIHUJAIS7448@GMAIL.COM">Email</a> |
+                <a href="https://www.linkedin.com/in/varnitajaiswal" target="_blank">LinkedIn</a> |
+                <a href="https://github.com/varnitajaiswal" target="_blank">GitHub</a> | 
+                <p> BHADOHI, UTTAR PRADESH</p>
+            </div>
+        </div>
+    </header>
+
+    <section id="summary" class="section">
+        <div class="container">
+            <h2>About Me</h2>
+            <p id="typing-summary"></p> </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2>Technical Arsenal</h2>
+            <div class="skills-grid">
+                <div>
+                    <h3>Proficiency Chart</h3>
+                    <canvas id="techSkillsChart"></canvas>
+                </div>
+                <div class="skills-text-list">
+                    <h3>Core Competencies</h3>
+                    <ul>
+                        <li><strong>Languages:</strong> C, Python, HTML/CSS/JS</li>
+                        <li><strong>Domains:</strong> Data Structure & Algorithm (DSA), Machine Learning</li>
+                        <li><strong>Cloud:</strong> Google Cloud Platform (Beginner)</li>
+                        <li><strong>Tools:</strong> VS Code, Git/GitHub, Canva</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 20px;">Soft Skills</h3>
+                    <ul>
+                        <li>Leadership & Team Management</li>
+                        <li>Time Management</li>
+                        <li>Creative Problem Solving</li>
+                        <li>Communication Skills</li>
+                        <li>Creative Writing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="section">
+        <div class="container">
+            <h2>Education Timeline</h2>
+            
+            <div class="education-item">
+                <h3>B.Tech in Computer Science (AI & ML)</h3>
+                <p><strong>PRANVEER SINGH INSTITUTE OF TECHNOLOGY</strong> | Kanpur</p>
+                <p><em>2024 - 2028 (Expected)</em></p>
+                <p>Focus: Artificial Intelligence & Machine Learning</p>
+            </div>
+
+            <div class="education-item">
+                <h3>Intermediate (Class XII)</h3>
+                <p><strong>ST. MARY'S SCHOOL</strong> | CISCE</p>
+                <p><em>Completed: 2024</em></p>
+                <p>Major Subjects: PCM [Physics, Chemistry, Mathematics]</p>
+            </div>
+
+            <div class="education-item">
+                <h3>High School (Class X)</h3>
+                <p><strong>ST. MARY'S SCHOOL</strong> | ICSE</p>
+                <p><em>Completed: 2022</em></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2>Key Projects</h2>
+            
+            <div class="project-item">
+                <h3>POWER GRID SOLUTIONS (IoT)</h3>
+                <p>An IoT-based system designed to detect electrical faults and cut power within milliseconds, preventing fatal shocks using ZMPT101B and ACS712 sensors paired with ESP32 microcontrollers.</p>
+                <p class="tech-font" style="margin-top: 10px; color: #00d4ff;">> Tech Stack: C++, ESP32, IoT Sensors, Relays</p>
+            </div>
+
+            <div class="project-item">
+                <h3>Personal Portfolio Website</h3>
+                <p>A responsive portfolio site built with HTML, CSS, and JavaScript to showcase my work and skills.</p>
+                <p class="tech-font" style="margin-top: 10px; color: #00d4ff;">> Tech Stack: HTML, CSS, JAVASCRIPT</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements" class="section">
+        <div class="container">
+            <h2>Achievements & Certifications</h2>
+            <ul class="achievements-list">
+                <li><strong>1st Position:</strong> TECH EXPO 2024 (IoT Project Display)</li>
+                <li><strong>3rd Position:</strong> PROTECH Competition</li>
+                <li><strong>Infosys Springboard:</strong> Certified in Python and HTML</li>
+                <li><strong>Workshop:</strong> Front End Web Development by Techgyan Technologies @ IIT Kanpur</li>
+                <li><strong>Job Simulation:</strong> TCS Cybersecurity (IAM & Security Consulting)</li>
+                <li><strong>Deloitte Australia:</strong> Completed Cyber Job Simulation (Incident Investigation & Data Protection)</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <button id="download-cv">Download CV</button>
+            <p style="margin-top: 20px; font-size: 0.8em; color: #555;">Designed by Varnita Jaiswal</p>
+        </div>
+    </footer>
+
+    <script>
+// 1. TYPING EFFECT FOR SUMMARY
+// Edit the text inside the quotes below to change your summary
+const summaryText = "Hi, I’m Varnita Jaiswal, a passionate and curious tech enthusiast currently pursuing B.Tech in CSE - AIML at PSIT Kanpur. I love building clean and user-friendly digital experiences, and I’m constantly exploring how artificial intelligence can solve real-world problems. When I’m not coding, you’ll find me learning something new, writing, or brainstorming creative ideas. I aim to grow as a developer who not only builds but brings impact.";
+let index = 0;
+function typeSummary() {
+    if (index < summaryText.length) {
+        document.getElementById('typing-summary').innerHTML += summaryText.charAt(index);
+        index++;
+        setTimeout(typeSummary, 40); // Speed of typing (lower is faster)
+    }
+}
+typeSummary();
+
+// 2. SCROLL ANIMATIONS (Makes sections fade in)
+const sections = document.querySelectorAll('.section');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+sections.forEach(section => observer.observe(section));
+
+// 3. SKILLS CHART CONFIGURATION
+const ctx = document.getElementById('techSkillsChart').getContext('2d');
+new Chart(ctx, {
+    type: 'bar', // Can be 'bar', 'line', 'radar', 'doughnut'
+    data: {
+        // EDIT LABELS: These are the names under the bars
+        labels: ['C/DSA', 'Python/AI', 'Web Dev', 'IoT/Hardware'], 
+        datasets: [{
+            label: 'Skill Level (%)',
+            // EDIT DATA: These are the numbers for the bar height (0 to 100)
+            data: [80, 75, 70, 85], 
+            backgroundColor: [
+                'rgba(0, 212, 255, 0.6)', // Blue
+                'rgba(255, 215, 0, 0.6)', // Gold
+                'rgba(0, 212, 255, 0.6)', // Blue
+                'rgba(255, 215, 0, 0.6)'  // Gold
+            ],
+            borderColor: '#fff',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: { beginAtZero: true, max: 100, ticks: { color: '#fff' } },
+            x: { ticks: { color: '#fff' } }
+        },
+        plugins: { legend: { labels: { color: '#fff' } } }
+    }
+});
+
+// 4. GITHUB STATS
+// Replace 'octocat' with your actual GitHub username
+const githubUsername = 'varnitajaiswal'; 
+fetch(`https://api.github.com/users/${githubUsername}`)
+    .then(response => response.json())
+    .then(data => {
+        if(data.message === "Not Found") {
+             document.getElementById('github-card').innerHTML = '<p>GitHub User Not Found</p>';
+        } else {
+            document.getElementById('github-card').innerHTML = `
+                <p>> User: ${data.login}</p>
+                <p>> Repositories: ${data.public_repos}</p>
+                <p>> Followers: ${data.followers}</p>
+            `;
+        }
+    })
+    .catch(() => {
+        document.getElementById('github-card').innerHTML = '<p>GitHub stats unavailable (Check Internet).</p>';
+    });
+
+// 5. DOWNLOAD CV BUTTON ACTION
+document.getElementById('download-cv').addEventListener('click', () => {
+    const link = document.createElement('a');
+    // Make sure you have a file named 'resume.pdf' in the folder
+    link.href = 'resume.pdf'; 
+    link.download = 'VARNITA_JAISWAL_CV.pdf';
+    link.click();
+});
+
+// 6. PARTICLE BACKGROUND ANIMATION (Standard Canvas Code)
+const canvas = document.createElement('canvas');
+canvas.id = 'particle-canvas';
+document.getElementById('particles').appendChild(canvas);
+const ctxParticles = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+for (let i = 0; i < 80; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: (Math.random() - 0.5) * 1.5
+    });
+}
+
+function animateParticles() {
+    ctxParticles.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        ctxParticles.beginPath();
+        ctxParticles.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctxParticles.fillStyle = '#00d4ff'; // Neon Blue Particles
+        ctxParticles.fill();
+    });
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// Adjust canvas on window resize
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+    </script>
+</body>
+</html>
