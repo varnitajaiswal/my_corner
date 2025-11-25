@@ -93,7 +93,7 @@ h1 {
 }
 
 @keyframes glow {
-    from { text-shadow: 0 0 10px #ff000d, 0 0 20px #00d4ff, 0 0 30px #00d4ff; }
+    from { text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 30px #00d4ff; }
     to { text-shadow: 0 0 20px #00d4ff, 0 0 30px #00d4ff, 0 0 40px #00d4ff, 0 0 50px #00d4ff; }
 }
 
@@ -458,7 +458,6 @@ footer {
             <h2>Achievements & Certifications</h2>
             <ul class="achievements-list">
                 <li><strong>1st Position:</strong> TECH EXPO 2024 (IoT Project Display)</li>
-                <li><strong>3rd Position:</strong> PROTECH Competition</li>
                 <li><strong>Infosys Springboard:</strong> Certified in Python and HTML</li>
                 <li><strong>Workshop:</strong> Front End Web Development by Techgyan Technologies @ IIT Kanpur</li>
                 <li><strong>Job Simulation:</strong> TCS Cybersecurity (IAM & Security Consulting)</li>
@@ -502,19 +501,20 @@ sections.forEach(section => observer.observe(section));
 // 3. SKILLS CHART CONFIGURATION
 const ctx = document.getElementById('techSkillsChart').getContext('2d');
 new Chart(ctx, {
-    type: 'bar', // Can be 'bar', 'line', 'radar', 'doughnut'
+    type: 'doughnut', // Can be 'bar', 'line', 'radar', 'doughnut'
     data: {
         // EDIT LABELS: These are the names under the bars
-        labels: ['C/DSA', 'Python/AI', 'Web Dev', 'IoT/Hardware'], 
+        labels: ['Frontend Web Dev', 'Python/AI', 'Prompt Engineering', 'C/DSA', 'Creative Writing'], 
         datasets: [{
             label: 'Skill Level (%)',
             // EDIT DATA: These are the numbers for the bar height (0 to 100)
-            data: [80, 75, 70, 85], 
+            data: [100, 60, 90, 50, 80], 
             backgroundColor: [
+                'rgba(246, 113, 182, 0.8)', // Pink
                 'rgba(0, 212, 255, 0.6)', // Blue
-                'rgba(255, 215, 0, 0.6)', // Gold
-                'rgba(0, 212, 255, 0.6)', // Blue
-                'rgba(255, 215, 0, 0.6)'  // Gold
+                'rgba(166, 0, 59, 0.8)', // Red
+                'rgba(166, 255, 59, 0.8)', // Green
+                'rgba(255, 223, 59, 0.8)'  // Yellow
             ],
             borderColor: '#fff',
             borderWidth: 1
